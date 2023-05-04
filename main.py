@@ -1,16 +1,16 @@
 from fastapi import FastAPI, Depends
 import model
 from database import engine
-from routes.admin import admin_route
-from routes.user import user_auth
+
+from routes import user_route
 
 app = FastAPI(title="CosMark APIs")
 
 
 model.Base.metadata.create_all(engine)
 
-app.include_router(admin_route.router)
-app.include_router(user_auth.router)
+
+app.include_router(user_route.router)
 
 @app.get('/')
 async def home():
